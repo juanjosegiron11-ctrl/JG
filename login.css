@@ -1,0 +1,122 @@
+/* Estilos del inicio de sesión */
+.pagina-login {
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #29203a 0, #0d0d0d 58%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+}
+.contenedor-login {
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  padding: 0;
+}
+.tarjeta-login {
+  background: #1a1a2e;
+  border: 1px solid rgba(255,64,129,.35);
+  border-radius: 18px;
+  padding: 38px 34px;
+  box-shadow: 0 18px 55px rgba(0,0,0,.45);
+}
+.icono-musica {
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 14px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: #ff4081;
+  font-size: 34px;
+}
+.marca-login {
+  color: #ff80ab;
+  text-align: center;
+  letter-spacing: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.tarjeta-login h1 {
+  text-align: center;
+  color: #f5f5f5;
+  font-size: 30px;
+  margin-bottom: 9px;
+}
+.texto-login {
+  color: #b0b0b0;
+  text-align: center;
+  line-height: 1.5;
+  margin-bottom: 28px;
+}
+#formulario-login {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#formulario-login label {
+  color: #f5f5f5;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 8px;
+}
+#formulario-login input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 14px;
+  border: 1px solid #45455c;
+  border-radius: 8px;
+  background: #10101d;
+  color: #fff;
+  font: inherit;
+  outline: none;
+}
+#formulario-login input:focus {
+  border-color: #ff4081;
+  box-shadow: 0 0 0 3px rgba(255,64,129,.14);
+}
+#formulario-login button, .boton-salir {
+  border: 0;
+  border-radius: 8px;
+  padding: 13px 16px;
+  background: #ff4081;
+  color: #fff;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background .2s, transform .2s;
+}
+#formulario-login button {
+  margin-top: 15px;
+}
+#formulario-login button:hover, .boton-salir:hover {
+  background: #e91e63;
+}
+#formulario-login button:disabled {
+  opacity: .65;
+  cursor: wait;
+}
+.mensaje-login {
+  min-height: 20px;
+  color: #ff8eaa;
+  font-size: 13px;
+  text-align: center;
+  line-height: 1.4;
+}
+.nota-login {
+  color: #88889b;
+  text-align: center;
+  font-size: 12px;
+  margin-top: 20px;
+}
+.boton-salir {
+  margin-top: 12px;
+  padding: 9px 14px;
+  font-size: 13px;
+}
+@media (max-width: 480px) {
+  .tarjeta-login { padding: 30px 22px; }
+}
