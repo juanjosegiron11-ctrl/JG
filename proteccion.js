@@ -1,28 +1,18 @@
-// Comprobación de sesión para la página Melodías.
-(async function protegerPagina() {
-  const cliente = window.supabaseClient;
-  if (!cliente) {
-    window.location.replace("index.html");
-    return;
-  }
+/// Verificar si existe la sesión guardada por login.js
+const usuarioActivo = localStorage.getItem("melodias_usuario");
 
-  const { data, error } = await cliente.auth.getSession();
-  if (error || !data.session) {
-    window.location.replace("index.html");
-    return;
-  }
+if (!usuarioActivo) {
+  window.location.href = "index.html";
+}
 
-  const botonSalir = document.getElementById("cerrar-sesion");
-  if (botonSalir) {
-    botonSalir.addEventListener("click", async () => {
-      botonSalir.disabled = true;
-      const { error: errorSalida } = await cliente.auth.signOut();
-      if (errorSalida) {
-        alert("No se pudo cerrar la sesión. Intenta de nuevo.");
-        botonSalir.disabled = false;
-        return;
-      }
-      window.location.replace("index.html");
+// Configurar el botón de cerrar sesión cuando cargue la página
+document.addEventListener("DOMContentLoaded", () => {
+  const btnLogout = document.querySelector(".logout-btn");
+  
+  if (btnLogout) {
+    btnLogout.addEventListener("click", () => {
+      localStorage.removeItem("melodias_usuario");
+      window.location.href = "index.html";
     });
   }
-})();
+});
