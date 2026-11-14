@@ -1,40 +1,50 @@
-const formulario = document.getElementById("formulario-login");
-const mensaje = document.getElementById("mensaje-login");
-const boton = document.getElementById("boton-login");
 
-if (!window.supabaseClient) {
-  mensaje.textContent = "No se pudo conectar con el servicio de autenticación.";
-  boton.disabled = true;
-} else {
-  // Si ya existe una sesión activa, pasa directamente a Melodías.
-  window.supabaseClient.auth.getSession().then(({ data, error }) => {
-    if (!error && data.session) {
-      window.location.replace("melodias.html");
-    }
-  });
+const formulario = document.getElementById("login-form");
+const mensaje = document.getElementById("mensaje");
+const boton = document.getElementById("login-button");
 
-  formulario.addEventListener("submit", async (evento) => {
+formulario.addEventListener("submit", async (evento) => {
     evento.preventDefault();
+
     mensaje.textContent = "";
-
-    const correo = document.getElementById("correo").value.trim();
-    const contrasena = document.getElementById("contrasena").value;
-
     boton.disabled = true;
     boton.textContent = "Verificando...";
 
-    const { error } = await window.supabaseClient.auth.signInWithPassword({
-      email: correo,
-      password: contrasena
-    });
+    const usuario = document.getElementById("usuario").value.trim();
+    const contrasena = document.getElementById("contrasena").value;
 
-    if (error) {
-      mensaje.textContent = "Correo electrónico o contraseña incorrectos.";
-      boton.disabled = false;
-      boton.textContent = "Iniciar sesión";
-      return;
+    try {
+        const respuesta = await fetch(
+            `${window.SUPABASE_URL}/functions/v1/validar-login`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "apikey": window.SUPABASE_PUBLISHABLE_KEY
+                },
+                body: JSON.stringify({
+                    usuario: usuario,
+                    contrasena: contrasena
+                })
+            }
+        );
+
+        const resultado = await respuesta.json();
+
+        if (!respuesta.ok || !resultado.autenticado) {
+            mensaje.textContent = resultado.error || "Usuario o contraseña incorrectos.";
+            return;
+        }
+
+        sessionStorage.setItem("melodias_acceso", "autorizado");
+        window.location.replace("melodias.html");
+
+    } catch (error) {
+        mensaje.textContent = "No se pudo conectar con el servidor.";
+        console.error(error);
+
+    } finally {
+        boton.disabled = false;
+        boton.textContent = "Iniciar sesión";
     }
-
-    window.location.replace("melodias.html");
-  });
-}
+});
