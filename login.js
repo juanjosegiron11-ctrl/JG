@@ -1,50 +1,55 @@
+// Si ya hay una sesión activa, redirige directo a melodias.html
+if (localStorage.getItem("melodias_usuario")) {
+  window.location.href = "melodias.html";
+}
 
-const formulario = document.getElementById("login-form");
+// Inicializar cliente de Supabase
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+const form = document.getElementById("login-form");
 const mensaje = document.getElementById("mensaje");
-const boton = document.getElementById("login-button");
+const boton = document.getElementById("btn-login");
 
-formulario.addEventListener("submit", async (evento) => {
-    evento.preventDefault();
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-    mensaje.textContent = "";
-    boton.disabled = true;
-    boton.textContent = "Verificando...";
+  const usuarioInput = document.getElementById("usuario").value.trim();
+  const contrasenaInput = document.getElementById("contrasena").value.trim();
 
-    const usuario = document.getElementById("usuario").value.trim();
-    const contrasena = document.getElementById("contrasena").value;
+  if (!usuarioInput || !contrasenaInput) {
+    mensaje.textContent = "Por favor, completa todos los campos.";
+    return;
+  }
 
-    try {
-        const respuesta = await fetch(
-            `${window.SUPABASE_URL}/functions/v1/validar-login`,
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "apikey": window.SUPABASE_PUBLISHABLE_KEY
-                },
-                body: JSON.stringify({
-                    usuario: usuario,
-                    contrasena: contrasena
-                })
-            }
-        );
+  boton.disabled = true;
+  mensaje.textContent = "Verificando credenciales...";
 
-        const resultado = await respuesta.json();
+  try {
+    const { data, error } = await supabaseClient
+      .from("usuariosAunar")
+      .select("usuario")
+      .eq("usuario", usuarioInput)
+      .eq("contrasena", contrasenaInput)
+      .maybeSingle();
 
-        if (!respuesta.ok || !resultado.autenticado) {
-            mensaje.textContent = resultado.error || "Usuario o contraseña incorrectos.";
-            return;
-        }
-
-        sessionStorage.setItem("melodias_acceso", "autorizado");
-        window.location.replace("melodias.html");
-
-    } catch (error) {
-        mensaje.textContent = "No se pudo conectar con el servidor.";
-        console.error(error);
-
-    } finally {
-        boton.disabled = false;
-        boton.textContent = "Iniciar sesión";
+    if (error) {
+      console.error("Error de Supabase:", error);
+      mensaje.textContent = "Error al conectar con la base de datos.";
+      boton.disabled = false;
+      return;
     }
+
+    if (data) {
+      localStorage.setItem("melodias_usuario", data.usuario);
+      mensaje.textContent = "¡Bienvenido! Redirigiendo...";
+      window.location.href = "melodias.html";
+    } else {
+      mensaje.textContent = "Usuario o contraseña incorrectos.";
+      boton.disabled = false;
+    }
+  } catch (err) {
+    console.error("Error inesperado:", err);
+    mensaje.textContent = "Ocurrió un error al intentar iniciar sesión.";
+    boton.disabled = false;
+  }
 });
