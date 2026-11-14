@@ -133,3 +133,5 @@ footer a {
 footer a:hover {
     text-decoration: underline;
 }
+/* Botón de cierre de sesión */
+.logout-btn{margin-top:10px;padding:9px 16px;border:1px solid #ff4081;border-radius:8px;background:transparent;color:#fff;cursor:pointer}.logout-btn:hover{background:#ff4081}
