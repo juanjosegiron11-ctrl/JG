@@ -1,0 +1,315 @@
+/* ===== BÁSICO ===== */
+* {
+    margin:  0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0d0d0d;
+    color: #f5f5f5;
+}
+
+/* ===== ENCABEZADO ===== */
+header {
+    background-color: #1a1a2e;
+    text-align: center;
+    padding: 20px;
+    border-bottom: 4px solid #ff4081;
+}
+
+header h1 {
+    color: #ff4081;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #b0b0b0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav a {
+    color: #f5f5f5;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #ff4081;
+}
+
+/* ===== FOTO PRINCIPAL ===== */
+.hero img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.hero-texto {
+    text-align: center;
+    padding: 20px;
+}
+
+/* ===== CONTENIDO ===== */
+main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+    color: #ff4081;
+}
+
+/* ===== TARJETAS DE ARTISTAS ===== */
+.tarjeta {
+    background-color: #1a1a2e;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-left: 5px solid #ff4081;
+}
+
+.tarjeta img {
+    width: 100%;
+    height: 550px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.tarjeta h3 {
+    color: #f5f5f5;
+    margin-bottom: 10px;
+}
+
+.tarjeta p {
+    color: #b0b0b0;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+/* ===== GALERÍA ===== */
+.galeria {
+    margin-top: 40px;
+}
+
+.fotos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+.fotos img {
+    width: 10%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* ===== PIE DE PÁGINA ===== */
+footer {
+    background-color: #1a1a2e;
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+    border-top: 4px solid #ff4081;
+}
+
+footer a {
+    color: #ff4081;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* ===== BOTONES ===== */
+.btn {
+    background-color: #ff4081;
+    color: #0d0d0d;
+    border: 2px solid #ff4081;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn:hover {
+    background-color: transparent;
+    color: #ff4081;
+}
+
+.btn:focus-visible,
+.campo input:focus-visible,
+.modal-cerrar:focus-visible {
+    outline: 3px solid #ffd700;
+    outline-offset: 2px;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+.btn-secundario {
+    background-color: transparent;
+    color: #f5f5f5;
+    border-color: #b0b0b0;
+}
+
+.btn-secundario:hover {
+    color: #ff4081;
+    border-color: #ff4081;
+}
+
+.btn-ancho {
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* ===== SESIÓN EN EL ENCABEZADO ===== */
+.sesion {
+    margin-top: 5px;
+}
+
+.sesion-activa {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.sesion-activa span {
+    color: #f5f5f5;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+/* ===== MODAL DE LOGIN ===== */
+.modal {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 100;
+}
+
+.modal-caja {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    background-color: #1a1a2e;
+    border-left: 5px solid #ff4081;
+    border-radius: 8px;
+    padding: 30px 25px 25px;
+}
+
+.modal-caja h2 {
+    margin-bottom: 20px;
+}
+
+.modal-cerrar {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: none;
+    border: none;
+    color: #b0b0b0;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.modal-cerrar:hover {
+    color: #ff4081;
+}
+
+.campo {
+    margin-bottom: 15px;
+}
+
+.campo label {
+    display: block;
+    margin-bottom: 6px;
+    color: #b0b0b0;
+    font-size: 14px;
+}
+
+.campo input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    background-color: #0d0d0d;
+    color: #f5f5f5;
+    border: 1px solid #3a3a55;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.campo input:focus {
+    border-color: #ff4081;
+}
+
+.mensaje {
+    min-height: 20px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.mensaje.error {
+    color: #ff6b6b;
+}
+
+.mensaje.exito {
+    color: #6bff9e;
+}
+
+/* ===== PÁGINA DE LOGIN ===== */
+.pagina-login {
+    min-height: 100vh;
+}
+
+.login-contenedor {
+    min-height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    padding: 20px;
+}
+
+.login-logo {
+    color: #ff4081;
+}
+
+.login-caja {
+    width: 100%;
+    max-width: 380px;
+    box-sizing: border-box;
+    background-color: #1a1a2e;
+    border-left: 5px solid #ff4081;
+    border-radius: 8px;
+    padding: 30px 25px 25px;
+}
+
+.login-caja h2 {
+    margin-bottom: 20px;
+}
