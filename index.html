@@ -5,20 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Melodías — Tu portal de música</title>
     <link rel="stylesheet" href="estilo.css">
-    
 </head>
 
 <body>
 
+    <!-- ===== VISTA 1: LOGIN (se ve primero) ===== -->
+    <div id="vista-login" class="login-contenedor">
+        <h1 class="login-logo">🎵 Melodías</h1>
+
+        <div class="login-caja">
+            <h2>Iniciar sesión</h2>
+
+            <div class="campo">
+                <label for="login-usuario">Usuario</label>
+                <input type="text" id="login-usuario" autocomplete="username">
+            </div>
+
+            <div class="campo">
+                <label for="login-password">Contraseña</label>
+                <input type="password" id="login-password" autocomplete="current-password">
+            </div>
+
+            <p id="login-mensaje" class="mensaje" role="alert" aria-live="polite"></p>
+
+            <button type="button" id="btn-login" class="btn btn-ancho">Entrar</button>
+        </div>
+    </div>
+
+    <!-- ===== VISTA 2: PÁGINA DE MÚSICA (aparece al iniciar sesión) ===== -->
+    <div id="vista-musica" hidden>
+
+
     <!-- ENCABEZADO -->
     <header>
         <h1>🎵 Melodías</h1>
-        
+
+        <div class="sesion">
+            <div class="sesion-activa">
+                <span id="saludo"></span>
+                <button type="button" id="btn-cerrar-sesion" class="btn btn-secundario">Cerrar sesión</button>
+            </div>
+        </div>
     </header>
 
     <!-- FOTO PRINCIPAL -->
     <section id="inicio" class="hero">
-        
+
         <div class="hero-texto">
             <h2>Bienvenido al mundo de la música</h2>
             <p>Explora algunos artistas destacados</p>
@@ -79,6 +111,10 @@
         <p>© 2026 Melodías — Hecho  por Juan Giron</p>
 
     </footer>
-<script src="int.js"></script>
+    </div>
+
+    <!-- Librería de Supabase (debe ir ANTES de int.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="int.js"></script>
 </body>
 </html>
